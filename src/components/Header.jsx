@@ -1,5 +1,8 @@
 import {Link} from "react-router-dom"
 
+import Login from "./Login";
+import SignUp from "./SignUp";
+
 const Header = () => {
     return (
         <header className='header'>
@@ -12,6 +15,8 @@ const Header = () => {
                 </Link>
 
                 <nav className='header__nav'>
+                    <Link  to="/login"  className="nav__item">Login</Link>
+                    <Link to="/register"  className="nav__item">Register</Link>
                     <Link to="/add-post" className="nav__item">Add post</Link>
                     <a href="https://github.com/zex1l" className="nav__item">Git Hub</a>
                 </nav>

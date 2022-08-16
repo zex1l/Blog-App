@@ -65,3 +65,10 @@
     transform: translate(0px, 0px);
     opacity: 1;
 }
+
+.active__block {
+    display: block;
+}
+.unActive__block {
+    display: none;
+}

@@ -1,9 +1,12 @@
 import {Link} from "react-router-dom"
 
-import Login from "./Login";
-import SignUp from "./SignUp";
+import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
+    const {isAuth, id} = useAuth()
+    console.log(isAuth)
+    
+
     return (
         <header className='header'>
             <div className="header__inner">
@@ -15,10 +18,11 @@ const Header = () => {
                 </Link>
 
                 <nav className='header__nav'>
-                    <Link  to="/login"  className="nav__item">Login</Link>
-                    <Link to="/register"  className="nav__item">Register</Link>
                     <Link to="/add-post" className="nav__item">Add post</Link>
                     <a href="https://github.com/zex1l" className="nav__item">Git Hub</a>
+                    {
+                        isAuth ? (<Link  to= {`/profile:${id}`}  className="nav__item">Profile</Link>) : (<Link  to="/auth"  className="nav__item active__block">Login</Link>)
+                    }
                 </nav>
             </div>
         </header>

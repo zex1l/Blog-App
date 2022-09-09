@@ -14,11 +14,11 @@ const PostsList = () => {
     }, [posts])
 
     const getPosts = () => {
-        const postsCollictionRef = collection(db, 'posts')
-        getDocs(postsCollictionRef)
+        const postsCollectionRef = collection(db, 'posts')
+        getDocs(postsCollectionRef)
             // Getting from fireStore data
-            .then(responce => {
-                const postsData = responce.docs.map(doc => ({
+            .then(res => {
+                const postsData = res.docs.map(doc => ({
                     data: doc.data(), 
                     id: doc.id
                 }))
@@ -28,15 +28,21 @@ const PostsList = () => {
     }
     
     return (
+
         <div className="posts">
-            Posts Lists
-            <ul>
-                {
-                    posts.map(post => {
-                        return <li key={post.id}>{post.data.post}</li>
-                    })
-                }
-            </ul>
+            <div className='posts__header'>My Posts</div>
+            <div className='posts__inner'>
+                    {
+                        posts.map((post, index) => {
+                            return (
+                                <div key={post.id} className='post__item'>
+                                    <div className='post__info'>{index+1}: {post.data.post}</div>
+                                </div>
+                            )
+                        })
+                    }
+            </div>
+
         </div>
     );
 };

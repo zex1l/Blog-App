@@ -1,5 +1,7 @@
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom"
 
+import {useEffect} from "react";
+
 import Header from "./components/Header";
 import HomePage from "./Pages/HomePage";
 import AddPostPage from "./Pages/AddPostPage";
@@ -11,8 +13,11 @@ import { useAuth } from "./hooks/useAuth";
 
 import "./styles/style.css"
 
+
 function App() {
-  const {isAuth} = useAuth()
+  const {isAuth, isAdmin} = useAuth()
+
+    console.log(isAdmin())
 
   return (
     <BrowserRouter>

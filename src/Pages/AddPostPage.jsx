@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import {useAuth} from "../hooks/useAuth";
 
 const AddPostPage = () => {
     const [post, setPost] = useState('')
+
+    const {isAdmin} = useAuth()
+
+    const admin = isAdmin()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         if(post !== '')
         {
-            await addDoc(collection(db, "posts"), {
+            await addDoc(collection (db, "posts"), {
                 post,
             })
             setPost('')
         }
     }
 
-    return (
+    return (admin ?
         <div className="addPost">
             <div className="container">
                 <form onSubmit={handleSubmit}>
@@ -30,6 +35,10 @@ const AddPostPage = () => {
                 </form>
             </div>
         </div>
+            :
+            <div className='container'>
+                <div>U are not admin</div>
+            </div>
     );
 };
 

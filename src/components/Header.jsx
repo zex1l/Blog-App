@@ -4,8 +4,6 @@ import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
     const {isAuth, id} = useAuth()
-    console.log(isAuth)
-    
 
     return (
         <header className='header'>
@@ -18,7 +16,6 @@ const Header = () => {
                 </Link>
 
                 <nav className='header__nav'>
-                    <Link to="/add-post" className="nav__item">Add post</Link>
                     <a href="https://github.com/zex1l" className="nav__item">Git Hub</a>
                     {
                         isAuth ? (<Link  to= {`/profile:${id}`}  className="nav__item">Profile</Link>) : (<Link  to="/auth"  className="nav__item active__block">Login</Link>)

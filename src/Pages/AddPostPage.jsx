@@ -3,6 +3,8 @@ import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import {useAuth} from "../hooks/useAuth";
 
+import Picker from 'emoji-picker-react';
+
 const AddPostPage = () => {
     const [post, setPost] = useState('')
     const [isAdmin, setIsAdmin] = useState(false)
@@ -27,18 +29,47 @@ const AddPostPage = () => {
         }
     }
 
+
+    const [showPicker, setShowPicker] = useState(false);
+
+    const onEmojiClick = (event, emojiObject) => {
+        setPost(prev =>  prev + emojiObject.emoji )
+        setShowPicker(false)
+    };
+
     return (isAdmin ?
         <div className="addPost">
             <div className="container">
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        placeholder="write your post"
-                        value={post}
-                        onChange={e => setPost(e.target.value)}    
-                    />
-                    <button>Add</button>
-                </form>
+               <div className='addPost__inner'>
+                       <form className='addPost__form' onSubmit={handleSubmit}>
+                           <h1>Write post</h1>
+                           <div className='form__items'>
+                               <textarea
+                                   rows="40" cols="60"
+                                   className='form__input'
+                                   type="text"
+                                   placeholder="write your post"
+                                   value={post}
+                                   onChange={e => setPost(e.target.value)}
+                               />
+                               <div className='form__actions'>
+                                   <button className='form__btn'>Add</button>
+                                   <img
+                                       className='addPost__img' src="https://openmoji.org/data/color/svg/1F60A.svg"
+                                       alt=''
+                                       onClick={() => setShowPicker(val => !val)}
+                                   />
+                               </div>
+                           </div>
+                       </form>
+
+
+                       <div>
+                           <div>
+                               {showPicker && <Picker onEmojiClick={onEmojiClick} />}
+                           </div>
+                       </div>
+               </div>
             </div>
         </div>
             :

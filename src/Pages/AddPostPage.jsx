@@ -1,14 +1,20 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { db } from "../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import {useAuth} from "../hooks/useAuth";
 
 const AddPostPage = () => {
     const [post, setPost] = useState('')
+    const [isAdmin, setIsAdmin] = useState(false)
 
-    const {isAdmin} = useAuth()
+    const {email} = useAuth()
 
-    const admin = isAdmin()
+    const admins = ['abc@gmail.com']
+
+    useEffect(() => {
+        setIsAdmin(admins.includes(email))
+    }, [])
+
 
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -21,7 +27,7 @@ const AddPostPage = () => {
         }
     }
 
-    return (admin ?
+    return (isAdmin ?
         <div className="addPost">
             <div className="container">
                 <form onSubmit={handleSubmit}>

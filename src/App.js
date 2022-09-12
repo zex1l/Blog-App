@@ -8,14 +8,11 @@ import SignUp from "./components/SignUp";
 import Profile from "./components/Profile";
 
 import { useAuth } from "./hooks/useAuth";
-
 import "./styles/style.css"
 
 
 function App() {
-  const {isAuth, isAdmin} = useAuth()
-
-    console.log(isAdmin())
+  const {isAuth} = useAuth()
 
   return (
     <BrowserRouter>
